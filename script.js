@@ -15,26 +15,26 @@ window.assign_to_chatroom = function() {
     console.log("assigning users to rooms");
     if (westRoom){
         if (checkChatRoom(users_joined[0], westChat)){
-        	chatrooms.west_side = users_joined.pop();	    	
+        	chatrooms.west_side = users_joined.shift();	    	
         	$('.chat-1').find('.users').append('<p><button type="button" class="btn btn-warning btn-xs">' + chatrooms.west_side + '</button></p>');
-        	westChat.push(chatrooms.west_side);
+        	westChat.unshift(chatrooms.west_side);
             westRoom = false;
             console.log(westChat[0]);
         }
         else{
-            users_joined.pop();
+            users_joined.unshift();
         }
     }
     else{
         if (checkChatRoom(users_joined[0], eastChat)){
-        	chatrooms.east_side = users_joined.pop();
-            eastChat.push(chatrooms.east_side);
+        	chatrooms.east_side = users_joined.shift();
+            eastChat.unshift(chatrooms.east_side);
         	$('.chat-2').find('.users').append('<p><button type="button" class="btn btn-warning btn-xs">' + chatrooms.east_side + '</button></p>');  	
             westRoom = true;
             console.log(eastChat[0]);
         }
         else{
-            users_joined.pop();
+            users_joined.unshift();
         }
     }
 }
@@ -46,11 +46,6 @@ var truthy = true;
 			truthy = false;
 		}
 	}
-    if(!truthy){
-        return false;
-    }   
-    else{
-        return true;
-    }
+    return truthy;
 
 }
